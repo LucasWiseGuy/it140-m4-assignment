@@ -11,17 +11,51 @@
 START hilow_game
 
     # Establish a valid guessing range.
-    TODO: Obtain the lower and upper bounds.
-    TODO: Repeat as needed until the bounds satisfy the requirement.
+    DO
+        PROMPT user for "Enter the lower bound: "
+        STORE input in lowerBound
+        PROMPT user for "Enter the upper bound: "
+        STORE input in upperBound
+
+        IF lowerBound >= upperBound THEN
+            DISPLAY "The lower bound must be less than the upper bound."
+        END IF
+    WHILE lowerBound >= upperBound
 
     # Establish the number the player is trying to guess.
-    TODO: Generate the required random number from the valid range.
+    SET secretNumber = random integer between lowerBound and upperBound
 
     # Play the game.
     TODO: Obtain and validate a guess using the selected bounds.
     TODO: Repeat the required game behavior until the correct guess.
         TODO: Compare a valid guess and provide the required feedback.
         TODO: Obtain and validate another guess when play continues.
+
+    PROMPT user for "Great, now guess a number between " + lowerBound + " and " + upperBound + ": "
+    STORE input in guess
+    WHILE guess < lowerBound OR guess > upperBound
+        PROMPT user for "Please enter a number between " + lowerBound + " and " + upperBound + ": "
+        STORE input in guess
+    END WHILE
+
+    WHILE guess != secretNumber
+
+        IF guess < secretNumber THEN
+            DISPLAY "Nope, too low."
+        ELSE
+            DISPLAY "Nope, too high."
+        END IF
+
+        PROMPT user for "Guess another number: "
+        STORE input in guess
+        WHILE guess < lowerBound OR guess > upperBound
+            PROMPT user for "Please enter a number between " + lowerBound + " and " + upperBound + ": "
+            STORE input in guess
+        END WHILE
+
+    END WHILE
+
+    DISPLAY "You got it!"
 
 END hilow_game
 
